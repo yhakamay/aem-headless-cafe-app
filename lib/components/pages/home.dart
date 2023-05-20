@@ -35,17 +35,15 @@ class _HomeState extends State<Home> {
       }).toList();
     } on Exception catch (e) {
       _error = e.toString();
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    fetchItems().then(
-      (_) => setState(() {
-        _isLoading = false;
-      }),
-    );
+    fetchItems();
   }
 
   @override
