@@ -63,29 +63,32 @@ class _HomeState extends State<Home> {
                     child: LinearProgressIndicator(),
                   ),
                 )
-              : ListView.builder(
-                  itemCount: _beverages.length,
-                  itemBuilder: (context, index) {
-                    final beverage = _beverages[index];
-                    return ListTile(
-                      title: Text(beverage.title),
-                      subtitle: Text(
-                        beverage.description?.plaintext ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      trailing: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: FadeInImage.memoryNetwork(
-                          image:
-                              'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
-                          placeholder: kTransparentImage,
-                          width: 50,
-                          height: 50,
+              : RefreshIndicator(
+                  onRefresh: fetchItems,
+                  child: ListView.builder(
+                    itemCount: _beverages.length,
+                    itemBuilder: (context, index) {
+                      final beverage = _beverages[index];
+                      return ListTile(
+                        title: Text(beverage.title),
+                        subtitle: Text(
+                          beverage.description?.plaintext ?? '',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    );
-                  },
+                        trailing: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: FadeInImage.memoryNetwork(
+                            image:
+                                'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
+                            placeholder: kTransparentImage,
+                            width: 50,
+                            height: 50,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
     );
   }
