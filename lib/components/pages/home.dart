@@ -22,7 +22,6 @@ class _HomeState extends State<Home> {
   String? _error;
 
   Future<void> fetchItems() async {
-    // https://publish-p111360-e1081459.adobeaemcloud.com/graphql/execute.json/wknd-shared/beverages-all
     try {
       final response = await http.get(Uri.https(
         GraphQL.endpointAuthority,
