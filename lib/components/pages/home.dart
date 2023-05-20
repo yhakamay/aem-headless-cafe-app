@@ -30,9 +30,11 @@ class _HomeState extends State<Home> {
       final json = jsonDecode(response.body);
       final items = json['data']['beverageList']['items'];
 
-      _beverages = items.map<Beverage>((item) {
-        return Beverage.fromJson(item);
-      }).toList();
+      setState(() {
+        _beverages = items.map<Beverage>((item) {
+          return Beverage.fromJson(item);
+        }).toList();
+      });
     } on Exception catch (e) {
       _error = e.toString();
     } finally {
