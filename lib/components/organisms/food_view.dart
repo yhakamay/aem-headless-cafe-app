@@ -20,7 +20,15 @@ class FoodView extends StatelessWidget {
       itemBuilder: (context, index) {
         final food = _foods[index];
         return ListTile(
-          title: Text(food.title),
+          title: Row(
+            children: [
+              Text(food.title),
+              const SizedBox(width: 8),
+              Badge(
+                label: Text(food.type.toUpperCase()),
+              ),
+            ],
+          ),
           subtitle: Text(
             food.description?.plaintext ?? '',
             maxLines: 2,
