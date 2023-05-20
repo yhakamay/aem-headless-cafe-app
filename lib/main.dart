@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/pages/home.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -13,29 +15,6 @@ class MainApp extends StatelessWidget {
       home: const Home(),
       theme: ThemeData(
         useMaterial3: true,
-      ),
-    );
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({
-    super.key,
-  });
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AEM Headless Cafe'),
-      ),
-      body: const Center(
-        child: Text('AEM Headless Cafe'),
       ),
     );
   }
