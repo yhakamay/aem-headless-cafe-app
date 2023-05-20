@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../utils/types/beverage.dart';
 import '../../utils/graphql.dart';
 import '../../utils/types/food.dart';
+import '../organisms/beverage_view.dart';
+import '../organisms/food_view.dart';
 
 enum Product { beverage, food }
 
@@ -102,56 +103,8 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     productView == Product.beverage
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _beverages.length,
-                            itemBuilder: (context, index) {
-                              final beverage = _beverages[index];
-                              return ListTile(
-                                title: Text(beverage.title),
-                                subtitle: Text(
-                                  beverage.description?.plaintext ?? '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                trailing: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: FadeInImage.memoryNetwork(
-                                    image:
-                                        'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
-                                    placeholder: kTransparentImage,
-                                    width: 50,
-                                    height: 50,
-                                  ),
-                                ),
-                              );
-                            },
-                          )
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _foods.length,
-                            itemBuilder: (context, index) {
-                              final food = _foods[index];
-                              return ListTile(
-                                title: Text(food.title),
-                                subtitle: Text(
-                                  food.description?.plaintext ?? '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                trailing: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: FadeInImage.memoryNetwork(
-                                    image:
-                                        'https://${GraphQL.endpointAuthority}${food.primaryImage.path}',
-                                    placeholder: kTransparentImage,
-                                    width: 50,
-                                    height: 50,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                        ? BeverageView(beverages: _beverages)
+                        : FoodView(foods: _foods),
                   ],
                 ),
     );
