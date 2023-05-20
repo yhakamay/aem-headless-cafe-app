@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../../utils/types/beverage.dart';
 import '../../utils/graphql.dart';
@@ -29,33 +26,17 @@ class _HomeState extends State<Home> {
 
   Future<void> fetchItems() async {
     try {
-      final beveragesRes = await http.get(Uri.https(
-        GraphQL.endpointAuthority,
-        '${GraphQL.endpointPath}${GraphQL.queryBeveragesAll}',
-      ));
-      final beveragesJson = jsonDecode(beveragesRes.body);
-      final beverageItems = beveragesJson['data']['beverageList']['items'];
+      final graphQl = GraphQL();
+
+      final beverages = await graphQl.fetchBeveragesAll();
+      final foods = await graphQl.fetchFoodsAll();
 
       setState(() {
-        _beverages = beverageItems.map<Beverage>((item) {
-          return Beverage.fromJson(item);
-        }).toList();
-      });
-
-      final foodsRes = await http.get(Uri.https(
-        GraphQL.endpointAuthority,
-        '${GraphQL.endpointPath}${GraphQL.queryFoodsAll}',
-      ));
-      final foodsJson = jsonDecode(foodsRes.body);
-      final foodItems = foodsJson['data']['foodList']['items'];
-
-      setState(() {
-        _foods = foodItems.map<Food>((item) {
-          return Food.fromJson(item);
-        }).toList();
+        _beverages = beverages;
+        _foods = foods;
       });
     } on Exception catch (e) {
-      _error = e.toString();
+      setState(() => _error = e.toString());
     } finally {
       setState(() => _isLoading = false);
     }
