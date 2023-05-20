@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:transparent_image/transparent_image.dart';
 
-import '../../utils/beverage.dart';
+import '../../utils/types/beverage.dart';
 import '../../utils/graphql.dart';
 
 class Home extends StatefulWidget {
