@@ -102,61 +102,55 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     productView == Product.beverage
-                        ? RefreshIndicator(
-                            onRefresh: fetchItems,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: _beverages.length,
-                              itemBuilder: (context, index) {
-                                final beverage = _beverages[index];
-                                return ListTile(
-                                  title: Text(beverage.title),
-                                  subtitle: Text(
-                                    beverage.description?.plaintext ?? '',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _beverages.length,
+                            itemBuilder: (context, index) {
+                              final beverage = _beverages[index];
+                              return ListTile(
+                                title: Text(beverage.title),
+                                subtitle: Text(
+                                  beverage.description?.plaintext ?? '',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: FadeInImage.memoryNetwork(
+                                    image:
+                                        'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
+                                    placeholder: kTransparentImage,
+                                    width: 50,
+                                    height: 50,
                                   ),
-                                  trailing: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: FadeInImage.memoryNetwork(
-                                      image:
-                                          'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
-                                      placeholder: kTransparentImage,
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           )
-                        : RefreshIndicator(
-                            onRefresh: fetchItems,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: _foods.length,
-                              itemBuilder: (context, index) {
-                                final food = _foods[index];
-                                return ListTile(
-                                  title: Text(food.title),
-                                  subtitle: Text(
-                                    food.description?.plaintext ?? '',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _foods.length,
+                            itemBuilder: (context, index) {
+                              final food = _foods[index];
+                              return ListTile(
+                                title: Text(food.title),
+                                subtitle: Text(
+                                  food.description?.plaintext ?? '',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: FadeInImage.memoryNetwork(
+                                    image:
+                                        'https://${GraphQL.endpointAuthority}${food.primaryImage.path}',
+                                    placeholder: kTransparentImage,
+                                    width: 50,
+                                    height: 50,
                                   ),
-                                  trailing: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: FadeInImage.memoryNetwork(
-                                      image:
-                                          'https://${GraphQL.endpointAuthority}${food.primaryImage.path}',
-                                      placeholder: kTransparentImage,
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
                   ],
                 ),
