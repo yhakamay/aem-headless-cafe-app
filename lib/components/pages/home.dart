@@ -51,7 +51,12 @@ class _HomeState extends State<Home> {
         title: const Text('AEM Headless Cafe'),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: SizedBox(
+                width: 160,
+                child: LinearProgressIndicator(),
+              ),
+            )
           : ListView.builder(
               itemCount: _beverages.length,
               itemBuilder: (context, index) {
