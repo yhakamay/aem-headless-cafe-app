@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:transparent_image/transparent_image.dart';
 
 import '../../utils/beverage.dart';
 import '../../utils/graphql.dart';
@@ -64,8 +65,10 @@ class _HomeState extends State<Home> {
                   ),
                   trailing: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
+                    child: FadeInImage.memoryNetwork(
+                      image:
+                          'https://${GraphQL.endpointAuthority}${beverage.primaryImage.path}',
+                      placeholder: kTransparentImage,
                       width: 50,
                       height: 50,
                     ),
